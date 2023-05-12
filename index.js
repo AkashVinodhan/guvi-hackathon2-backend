@@ -5,6 +5,7 @@ const app = express();
 const Razorpay = require("razorpay");
 
 const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
 const Product = require("./Models/productModels");
 const Message = require("./Models/messageModel");
 
