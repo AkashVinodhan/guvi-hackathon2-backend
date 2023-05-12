@@ -36,16 +36,20 @@ mongoose.connection.once("open", () => {
 
 //api endpoints
 
+app.get("/", (req, res) => {
+  res.status(200).send("Home);
+});
+
 app.get("/products", async (req, res) => {
   const products = await Product.find({});
-  res.send(products);
+  res.status(200).send(products);
 });
 
 app.post("/messages", async (req, res) => {
   const { name, email, description } = req.body;
   const message = await Message.create({ name, email, description });
   console.log(message);
-  res.send(message);
+  res.status(200).send(message);
 });
 
 const instance = new Razorpay({
@@ -62,12 +66,12 @@ app.post("/order", async (req, res) => {
       currency: "INR",
     };
     const order = await instance.orders.create(options);
-    res.send({ success: true, key: process.env.RAZOR_KEY, data: order });
+    res.status(200).send({ success: true, key: process.env.RAZOR_KEY, data: order });
   } catch (error) {
     console.log(error);
   }
 });
 
 app.post("/payment", async (req, res) => {
-  res.send({ success: true });
+  res.status(200).send({ success: true });
 });
