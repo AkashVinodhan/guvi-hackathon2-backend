@@ -37,7 +37,7 @@ mongoose.connection.once("open", () => {
 //api endpoints
 
 app.get("/", (req, res) => {
-  res.status(200).send("Home);
+  res.status(200).send("Home");
 });
 
 app.get("/products", async (req, res) => {
