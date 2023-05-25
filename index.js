@@ -9,6 +9,7 @@ const app = express();
 const Razorpay = require("razorpay");
 
 const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
 const Product = require("./Models/productModels");
 const Message = require("./Models/messageModel");
 const User = require("./Models/userModel");
@@ -21,7 +22,11 @@ app.use(cookieParser());
 // connect to DB
 const connectDB = async () => {
   try {
+<<<<<<< HEAD
     await mongoose.connect(process.env.MONGO_URL, {
+=======
+      await mongoose.connect(process.env.MONGO_URL, {
+>>>>>>> b8ff1ec234aa4dbb3f8192380bfee8158986fd1f
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });
@@ -55,10 +60,17 @@ const createToken = (id) => {
 };
 //api endpoints
 
+<<<<<<< HEAD
 //get all products
+=======
+app.get("/", (req, res) => {
+  res.status(200).send("Home");
+});
+
+>>>>>>> b8ff1ec234aa4dbb3f8192380bfee8158986fd1f
 app.get("/products", async (req, res) => {
   const products = await Product.find({});
-  res.send(products);
+  res.status(200).send(products);
 });
 
 //get product by id
@@ -84,7 +96,7 @@ app.post("/messages", async (req, res) => {
   const { name, email, description } = req.body;
   const message = await Message.create({ name, email, description });
   console.log(message);
-  res.send(message);
+  res.status(200).send(message);
 });
 
 //login
@@ -172,12 +184,12 @@ app.post("/order", async (req, res) => {
       currency: "INR",
     };
     const order = await instance.orders.create(options);
-    res.send({ success: true, key: process.env.RAZOR_KEY, data: order });
+    res.status(200).send({ success: true, key: process.env.RAZOR_KEY, data: order });
   } catch (error) {
     console.log(error);
   }
 });
 
 app.post("/payment", async (req, res) => {
-  res.send({ success: true });
+  res.status(200).send({ success: true });
 });
