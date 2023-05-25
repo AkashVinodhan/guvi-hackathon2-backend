@@ -22,11 +22,7 @@ app.use(cookieParser());
 // connect to DB
 const connectDB = async () => {
   try {
-<<<<<<< HEAD
-    await mongoose.connect(process.env.MONGO_URL, {
-=======
       await mongoose.connect(process.env.MONGO_URL, {
->>>>>>> b8ff1ec234aa4dbb3f8192380bfee8158986fd1f
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });
@@ -60,14 +56,14 @@ const createToken = (id) => {
 };
 //api endpoints
 
-<<<<<<< HEAD
+
 //get all products
-=======
+
 app.get("/", (req, res) => {
   res.status(200).send("Home");
 });
 
->>>>>>> b8ff1ec234aa4dbb3f8192380bfee8158986fd1f
+
 app.get("/products", async (req, res) => {
   const products = await Product.find({});
   res.status(200).send(products);
